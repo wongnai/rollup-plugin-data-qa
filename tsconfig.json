@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es2016",
+		"module": "esnext",
+		"strict": true,
+		"baseUrl": "./src",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"types": ["jest", "node"],
+		"noEmit": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"isolatedModules": false,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"emitDecoratorMetadata": false,
+		"jsx": "react-jsx",
+		"useUnknownInCatchVariables": false
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist", "scripts", "jest"]
+}
