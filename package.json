@@ -1,5 +1,5 @@
 {
-  "name": "@lmwn/rollup-plugin-data-qa",
+  "name": "@lmwn/rollup-plugin-inject-data-qa",
   "version": "0.0.0",
   "repository": "https://git.wndv.co/wongnai/frontend/lmwn-libraries/rollup-plugin-data-qa",
   "author": "LINE MAN Wongnai Frontend Team",
@@ -9,7 +9,7 @@
     "lint": "eslint --ext .tsx,.ts src",
     "lint:fix": "eslint --ext .tsx,.ts --fix src",
     "test": "jest",
-    "test:mr": "jest --ci --coverage --changedSince=origin/master",
+    "test:mr": "jest --ci --coverage --changedSince=origin/main",
     "type-check": "tsc --noEmit",
     "build": "rollup -c rollup.config.js",
     "release": "yarn build && semantic-release",
@@ -24,7 +24,7 @@
     "magic-string": "0.27.0"
   },
   "devDependencies": {
-    "@lmwn/kyo-rollup": "1.3.0",
+    "@lmwn/kyo-rollup": "1.3.2",
     "@lmwn/semantic-release-lib": "1.1.0",
     "@optimize-lodash/rollup-plugin": "4.0.1",
     "@testing-library/jest-dom": "5.16.4",

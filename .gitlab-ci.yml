@@ -1,0 +1,6 @@
+include:
+  - project: wongnai/frontend/ci-cd-templates
+    file: pipelines/internal-library.yaml
+
+variables:
+  PROJECT_PRODUCTION_BRANCH: main
