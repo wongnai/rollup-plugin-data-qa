@@ -1,6 +1,6 @@
 {
   "name": "@lmwn/rollup-plugin-inject-data-qa",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repository": "https://git.wndv.co/wongnai/frontend/lmwn-libraries/rollup-plugin-data-qa",
   "author": "LINE MAN Wongnai Frontend Team",
   "license": "MIT",
