@@ -58,6 +58,10 @@ const cjsBundle = {
 					src: './package.json',
 					dest: config.deploy,
 				},
+				{
+					src: './README.md',
+					dest: config.deploy,
+				},
 			],
 		}),
 	],

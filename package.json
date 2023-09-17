@@ -15,7 +15,7 @@
     "lint:fix": "eslint --ext .tsx,.ts --fix src",
     "test": "jest",
     "type-check": "tsc --noEmit",
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c",
     "release": "yarn build && HUSKY=0 semantic-release",
     "postversion": "cp package.json .."
   },
