@@ -16,7 +16,7 @@ inspired by
 ## Installation
 
 ```sh
-  yarn add -D @lmwn/rollup-data-qa
+  yarn add -D @lmwn/rollup-plugin-inject-data-qa
 ```
 
 ## Usage

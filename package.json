@@ -9,6 +9,7 @@
   "homepage": "https://github.com/wongnai/rollup-plugin-data-qa#readme",
   "license": "MIT",
   "deploy": "dist",
+  "keywords": ["rollup", "rollup plugin", "react", "styled-component", "e2e", "data-qa"],
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint --ext .tsx,.ts src",
