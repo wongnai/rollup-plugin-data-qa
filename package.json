@@ -16,7 +16,7 @@
     "test": "jest",
     "type-check": "tsc --noEmit",
     "build": "rollup -c rollup.config.js",
-    "release": "HUSKY=0 yarn build && semantic-release",
+    "release": "yarn build && HUSKY=0 semantic-release",
     "postversion": "cp package.json .."
   },
   "dependencies": {
