@@ -20,8 +20,10 @@
     "postversion": "cp package.json .."
   },
   "dependencies": {
+    "@rollup/pluginutils": "5.0.2",
     "change-case": "4.1.2",
     "estree-walker": "3.0.1",
+    "lodash": "4.17.21",
     "magic-string": "0.27.0"
   },
   "devDependencies": {
@@ -29,7 +31,6 @@
     "@rollup/plugin-commonjs": "21.0.0",
     "@rollup/plugin-node-resolve": "13.0.0",
     "@rollup/plugin-typescript": "6.0.0",
-    "@rollup/pluginutils": "5.0.2",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/commit-analyzer": "8.0.1",
     "@semantic-release/git": "9.0.0",
@@ -46,7 +47,6 @@
     "jest": "27.3.1",
     "jest-transform-stub": "2.0.0",
     "lint-staged": "10.3.0",
-    "lodash": "4.17.21",
     "prettier": "2.3.1",
     "rollup": "2.58.0",
     "rollup-plugin-cleaner": "1.0.0",
