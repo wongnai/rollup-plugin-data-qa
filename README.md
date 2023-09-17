@@ -1,6 +1,6 @@
 # Rollup Plugin inject data-qa
 
-[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/@lmwn/rollup-plugin-inject-data-qa)
+[![npm](https://img.shields.io/npm/dm/@lmwn/rollup-plugin-inject-data-qa.svg)](https://www.npmjs.com/package/@lmwn/rollup-plugin-inject-data-qa)
 [![semantic-release](https://img.shields.io/badge/semantic-release-e10079.svg?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) 
