@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.1...v1.0.2) (2023-09-17)
+
+
+### Bug Fixes
+
+* fix build script ([27d4f36](https://github.com/wongnai/rollup-plugin-data-qa/commit/27d4f36798c229658feca78f26039f9cb4640598))
+
 ## [1.0.1](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.0...v1.0.1) (2023-09-17)
 
 
