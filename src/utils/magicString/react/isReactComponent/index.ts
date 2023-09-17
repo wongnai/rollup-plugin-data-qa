@@ -1,4 +1,4 @@
-import last from 'lodash/last'
+import { last } from 'lodash'
 
 import isReactNode from 'utils/magicString/react/isReactNode'
 

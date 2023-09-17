@@ -1,14 +1,12 @@
 import { createFilter } from '@rollup/pluginutils'
 import { BaseNode, walk } from 'estree-walker'
-import isEmpty from 'lodash/isEmpty'
-import last from 'lodash/last'
+import { isEmpty, last } from 'lodash'
 import MagicString from 'magic-string'
 import { PluginImpl } from 'rollup'
 
-import ensureArray from '@wongnai/utils/array/ensureArray'
-
 import { UNCHANGED } from 'pluginConstants'
 import { InjectDataQaParams } from 'types'
+import ensureArray from 'utils/ensureArray'
 import formatName from 'utils/formatName'
 import findFunctionComponentName from 'utils/magicString/react/findFunctionComponentName'
 import getStyledComponentName from 'utils/magicString/react/findStyledComponentName'

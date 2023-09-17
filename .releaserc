@@ -1,0 +1,62 @@
+{
+	"branches": [
+		{
+			"name": "main",
+			"channel": "latest"
+		}
+	],
+	"plugins": [
+		[
+			"@semantic-release/commit-analyzer",
+			{
+				"preset": "angular",
+				"releaseRules": [
+					{
+						"type": "*",
+						"release": "patch"
+					},
+					{
+						"tag": "*",
+						"release": "patch"
+					},
+					{
+						"subject": "*",
+						"release": "patch"
+					},
+					{
+						"body": "*",
+						"release": "patch"
+					},
+					{
+						"message": "*",
+						"release": "patch"
+					}
+				]
+			}
+		],
+		"@semantic-release/release-notes-generator",
+		[
+			"@semantic-release/changelog",
+			{
+				"changelogFile": "CHANGELOG.md",
+				"changelogTitle": "# Changelog"
+			}
+		],
+		[
+			"@semantic-release/npm",
+			{
+				"pkgRoot": "dist"
+			}
+		],
+		[
+			"@semantic-release/git",
+			{
+				"assets": [
+					"package.json",
+					"CHANGELOG.md"
+				],
+				"message": "chore(release): <%= nextRelease.version %> \n\n<%= nextRelease.notes %>"
+			}
+		]
+	]
+}

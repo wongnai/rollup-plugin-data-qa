@@ -1,5 +1,4 @@
-import head from 'lodash/head'
-import isEmpty from 'lodash/isEmpty'
+import { head, isEmpty } from 'lodash'
 import MagicString from 'magic-string'
 
 import { DATA_QA } from 'pluginConstants'
