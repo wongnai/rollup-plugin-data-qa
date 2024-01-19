@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
-		"target": "es2016",
-		"module": "esnext",
+		"target": "ES6",
+		"module": "ESNext",
 		"strict": true,
 		"baseUrl": "./src",
 		"importHelpers": true,
-		"moduleResolution": "node",
+		"moduleResolution": "Node",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"sourceMap": true,
@@ -15,7 +15,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": false,
 		"strictNullChecks": true,
-		"suppressImplicitAnyIndexErrors": true,
 		"emitDecoratorMetadata": false,
 		"jsx": "react-jsx",
 		"useUnknownInCatchVariables": false

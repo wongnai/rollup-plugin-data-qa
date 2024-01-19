@@ -8,6 +8,8 @@ export default function findFunctionComponentName({
 }: FindFunctionComponentNameParams) {
 	if (node.type === 'ExportNamedDeclaration' && node.declaration?.id?.name) {
 		return node.declaration.id.name
+	} else if (node.type === 'ExportDefaultDeclaration' && node.declaration?.id?.name) {
+		return node.declaration.id.name
 	} else if (parent?.type === 'VariableDeclarator' && parent?.id && isReactComponent(node)) {
 		return parent.id.name
 	}
