@@ -19,6 +19,7 @@
     "data-qa"
   ],
   "main": "./index.cjs",
+  "module": "./index.js",
   "types": "./index.d.ts",
   "exports": {
     ".": {
