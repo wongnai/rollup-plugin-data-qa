@@ -7,7 +7,7 @@ export default function isReactComponent(node: Record<string, any>): boolean {
 		return true
 	}
 
-	const nodeBody = node.body
+	const nodeBody = node?.body
 	const lastNodeBody = last(nodeBody?.body) as Record<string, any>
 
 	if (lastNodeBody?.type === 'ReturnStatement') {
