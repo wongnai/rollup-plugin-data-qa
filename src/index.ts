@@ -46,7 +46,7 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 		try {
 			ast = parse(code)
 		} catch (error) {
-			this.error(error)
+			this.warn(`${id} - ${error}`)
 		}
 
 		if (!ast) return UNCHANGED
