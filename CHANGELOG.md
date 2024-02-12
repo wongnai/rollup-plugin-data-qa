@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.8...v1.0.9) (2024-02-12)
+
+
+### Bug Fixes
+
+* use warn instead of error when can't parse file ([#3](https://github.com/wongnai/rollup-plugin-data-qa/issues/3)) ([2b94362](https://github.com/wongnai/rollup-plugin-data-qa/commit/2b94362aca4d6e8cc09a8caa1d53cd54b251a833))
+
 ## [1.0.8](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.7...v1.0.8) (2024-01-22)
 
 ## [1.0.7](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.6...v1.0.7) (2024-01-22)
