@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.12](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.11...v1.0.12) (2024-02-22)
+
+
+### Bug Fixes
+
+* isJsxAndNotFragment condition of isReactNode ([#6](https://github.com/wongnai/rollup-plugin-data-qa/issues/6)) ([67afb82](https://github.com/wongnai/rollup-plugin-data-qa/commit/67afb82d8776351ef7fec264d5cb7e0c4f5c6829))
+
 ## [1.0.11](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.10...v1.0.11) (2024-02-22)
 
 
