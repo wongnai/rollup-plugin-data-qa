@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.11](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.10...v1.0.11) (2024-02-22)
+
+
+### Bug Fixes
+
+* isReactNode check include jsx ([#5](https://github.com/wongnai/rollup-plugin-data-qa/issues/5)) ([f55bf24](https://github.com/wongnai/rollup-plugin-data-qa/commit/f55bf24b83b46332bf1e60ecfb9b29350f98c079))
+
 ## [1.0.10](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.9...v1.0.10) (2024-02-21)
 
 
