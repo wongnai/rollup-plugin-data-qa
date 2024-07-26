@@ -2,7 +2,9 @@ import { head, isEmpty } from 'lodash'
 import MagicString from 'magic-string'
 
 import { DATA_QA } from 'pluginConstants'
+import isObjectAssigning from 'utils/isObjectAssigning'
 import appendObject from 'utils/magicString/appendObject'
+import insertToObject from 'utils/magicString/insertToObject'
 import overwriteWithObject from 'utils/magicString/overwriteWithObject'
 import isReactNode from 'utils/magicString/react/isReactNode'
 
@@ -26,14 +28,35 @@ export default function injectReactFunctionComponent({
 			const hasProps = tagProps.value !== null // NOTE: if a component has props, the value will always be undefined
 
 			if (hasProps) {
-				const props = head(tagProps.properties! as Record<string, any>[])
+				// e.g `<svg>...</svg>`
+				if (isObjectAssigning(tagProps)) {
+					const firstArgs = head(tagProps.arguments as Record<string, any>[])
 
-				props &&
-					appendObject({
-						code,
-						startPosition: props.start,
-						attrs: { [DATA_QA]: componentName },
-					})
+					firstArgs &&
+						insertToObject({
+							code,
+							node: firstArgs,
+							attrs: { [DATA_QA]: componentName },
+						})
+				} else {
+					// e.g `<div />`
+					if (isEmpty(tagProps.properties)) {
+						insertToObject({
+							code,
+							node: tagProps,
+							attrs: { [DATA_QA]: componentName },
+						})
+					} else {
+						const props = head(tagProps.properties as Record<string, any>[])
+
+						props &&
+							appendObject({
+								code,
+								startPosition: props.start,
+								attrs: { [DATA_QA]: componentName },
+							})
+					}
+				}
 			} else {
 				overwriteWithObject({
 					code,

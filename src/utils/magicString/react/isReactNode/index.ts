@@ -5,7 +5,9 @@ export default function isReactNode(node: Record<string, any>) {
 	const isJsxAndNotFragment =
 		(node?.callee?.name === 'jsxDEV' ||
 			node?.callee?.name === 'jsx' ||
-			node?.callee?.name === 'jsxs') &&
+			node?.callee?.name === '_jsx' ||
+			node?.callee?.name === 'jsxs' ||
+			node?.callee?.name === '_jsxs') &&
 		node?.arguments?.[0]?.name !== 'Fragment'
 
 	return isReactCreateElement || isJsxAndNotFragment
