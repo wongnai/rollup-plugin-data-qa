@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.13](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.12...v1.0.13) (2024-07-26)
+
+
+### Features
+
+* support _jsxs & _jsx ([#7](https://github.com/wongnai/rollup-plugin-data-qa/issues/7)) ([09afe2a](https://github.com/wongnai/rollup-plugin-data-qa/commit/09afe2a7d67be8e67d8ee7303fa4b6bafd76980c))
+
 ## [1.0.12](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.11...v1.0.12) (2024-02-22)
 
 
