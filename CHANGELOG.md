@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.15](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.14...v1.0.15) (2024-10-11)
+
+
+### Bug Fixes
+
+* improve isReactNode (also check _Fragment) ([b3f2d24](https://github.com/wongnai/rollup-plugin-data-qa/commit/b3f2d2439e4df124b70149205cbb37af07db0220))
+
 ## [1.0.14](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.13...v1.0.14) (2024-08-22)
 
 ## [1.0.13](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.12...v1.0.13) (2024-07-26)
