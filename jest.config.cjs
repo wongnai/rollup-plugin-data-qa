@@ -16,6 +16,7 @@ module.exports = {
 			lines: 80,
 		},
 	},
+	testPathIgnorePatterns: ['/node_modules/', '/examples/'],
 	collectCoverageFrom: [
 		'src/**/*.{ts,tsx}',
 		'!src/**/*.stories.{ts,tsx}',

@@ -20,5 +20,5 @@
 		"useUnknownInCatchVariables": false
 	},
 	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "scripts", "jest"]
+	"exclude": ["node_modules", "scripts", "jest", "examples"]
 }

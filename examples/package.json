@@ -1,0 +1,35 @@
+{
+  "name": "examples",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "E2E_ENABLED=true vitest",
+    "sync": "yarn add --dev file:../dist",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "styled-components": "6.1.19"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@testing-library/user-event": "14.6.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "globals": "^16.3.0",
+    "jest-styled-components": "7.2.0",
+    "jsdom": "26.1.0",
+    "rollup-plugin-data-qa": "file:../dist",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4",
+    "vitest": "3.2.4"
+  }
+}

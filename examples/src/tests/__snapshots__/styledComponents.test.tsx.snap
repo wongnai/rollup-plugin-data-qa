@@ -1,0 +1,46 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`styled components > 01 - styled component in a div 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  data-qa="component-a"
+>
+  <div
+    class="c0"
+    data-qa="styled-a"
+  >
+    xxx
+  </div>
+</div>
+`;
+
+exports[`styled components > 02 - returning styled component 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0"
+  data-qa="component-a"
+>
+  xxx
+</div>
+`;
+
+exports[`styled components > 03 - returning styled component but with useMemo above 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0"
+  data-qa="component-a"
+>
+  <div>
+    xxx
+  </div>
+</div>
+`;
