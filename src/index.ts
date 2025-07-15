@@ -45,42 +45,42 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 			const magicString = new MagicString(code)
 
-			const processReactFunctionComponent = (
-				inputNode: BaseNode,
-				inputNodeName?: string,
-				startPosition?: number,
-			) => {
-				walk(inputNode, {
-					enter(node: any) {
-						// skip the same node that we are processing, to prevent infinite loop
-						if (startPosition === node.start) return
-
-						// skip react fragment ex: `<></>`
-						// skip object expression ex: `{}`
-						if (isReactFragment(node) || node.type === 'ObjectExpression') return this.skip()
-
-						if (isReactNode(node) && inputNodeName) {
-							const formattedName = formatName(inputNodeName, format)
-							injectReactFunctionComponent({
-								code: magicString,
-								componentName: formattedName,
-								node,
-							})
-
-							// skip processing the children of react node
-							return this.skip()
-						}
-
-						const nodeName = node.id?.name
-
-						if (nodeName) {
-							processReactFunctionComponent(node, nodeName, node.start)
-						}
-					},
-				})
-			}
-
 			if (!disabledReactFunctionComponent) {
+				const processReactFunctionComponent = (
+					inputNode: BaseNode,
+					inputNodeName?: string,
+					startPosition?: number,
+				) => {
+					walk(inputNode, {
+						enter(node: any) {
+							// skip the same node that we are processing, to prevent infinite loop
+							if (startPosition === node.start) return
+
+							// skip react fragment ex: `<></>`
+							// skip object expression ex: `{}`
+							if (isReactFragment(node) || node.type === 'ObjectExpression') return this.skip()
+
+							if (isReactNode(node) && inputNodeName) {
+								const formattedName = formatName(inputNodeName, format)
+								injectReactFunctionComponent({
+									code: magicString,
+									componentName: formattedName,
+									node,
+								})
+
+								// skip processing the children of react node
+								return this.skip()
+							}
+
+							const nodeName = node.id?.name
+
+							if (nodeName) {
+								processReactFunctionComponent(node, nodeName, node.start)
+							}
+						},
+					})
+				}
+
 				processReactFunctionComponent(ast)
 			}
 
