@@ -2,6 +2,6 @@
 	"watch": ["src"],
 	"ext": "ts,tsx",
 	"ignore": ["src/**/*.spec.ts", "src/**/*.test.ts", "dist/**/*"],
-	"exec": "yarn build && yarn example:sync && yarn example:test",
-	"delay": 500
+	"exec": "yarn build && yarn example:sync && yarn example:test --run",
+	"delay": 200
 }

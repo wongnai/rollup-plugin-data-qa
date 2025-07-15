@@ -2,7 +2,7 @@
 
 exports[`function components > 01 - simple arrow function 1`] = `
 <div
-  data-qa="component-a"
+  data-qa="component01"
 >
   xxx
 </div>
@@ -10,7 +10,7 @@ exports[`function components > 01 - simple arrow function 1`] = `
 
 exports[`function components > 02 - simple return 1`] = `
 <div
-  data-qa="component-a"
+  data-qa="component02"
 >
   xxx
 </div>
@@ -19,7 +19,7 @@ exports[`function components > 02 - simple return 1`] = `
 exports[`function components > 03 - simple component with some properties 1`] = `
 <div
   class="bello"
-  data-qa="component-a"
+  data-qa="component03"
   id="bello"
 >
   xxx
@@ -28,7 +28,7 @@ exports[`function components > 03 - simple component with some properties 1`] = 
 
 exports[`function components > 04 - with a const element in function scope 1`] = `
 <div
-  data-qa="component-a"
+  data-qa="component04"
 >
   <div
     data-qa="b"
@@ -39,20 +39,20 @@ exports[`function components > 04 - with a const element in function scope 1`] =
 `;
 
 exports[`function components > 05 - with a useCallback element in function scope 1`] = `
-<div
-  data-qa="component-a"
->
-  <div>
+<div>
+  <div
+    data-qa="component05"
+  >
     xxx
   </div>
 </div>
 `;
 
 exports[`function components > 06 - with a useMemo in function scope 1`] = `
-<div
-  data-qa="component-a"
->
-  <div>
+<div>
+  <div
+    data-qa="component06"
+  >
     xxx
   </div>
 </div>
@@ -60,7 +60,7 @@ exports[`function components > 06 - with a useMemo in function scope 1`] = `
 
 exports[`function components > 07 - with a function component child element 1`] = `
 <div
-  data-qa="component-a"
+  data-qa="component07"
 >
   <div
     data-qa="b"
@@ -71,13 +71,15 @@ exports[`function components > 07 - with a function component child element 1`] 
 `;
 
 exports[`function components > 08 - with list of elements in useMemo 1`] = `
-<div
-  data-qa="component-a"
->
-  <div>
+<div>
+  <div
+    data-qa="component08"
+  >
     xxx
   </div>
-  <div>
+  <div
+    data-qa="component08"
+  >
     yyy
   </div>
 </div>
@@ -126,8 +128,33 @@ exports[`function components > 12 - with a function component outside of functio
 
 exports[`function components > 13 - with a function component with spreaded props 1`] = `
 <div
-  data-qa="component-a"
+  data-qa="component13"
 >
   xxx
 </div>
 `;
+
+exports[`function components > 14 - wrapped with forwardRef 1`] = `
+<div>
+  xxx
+</div>
+`;
+
+exports[`function components > 15 - fragment with empty div 1`] = `
+HTMLCollection [
+  <div />,
+]
+`;
+
+exports[`function components > 16 - fragment with list of elements from const 1`] = `
+HTMLCollection [
+  <div>
+    1
+  </div>,
+  <div>
+    2
+  </div>,
+]
+`;
+
+exports[`function components > 17 - component with JSX const but returns null 1`] = `null`;

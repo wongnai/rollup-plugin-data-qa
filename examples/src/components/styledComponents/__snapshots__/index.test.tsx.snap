@@ -6,7 +6,7 @@ exports[`styled components > 01 - styled component in a div 1`] = `
 }
 
 <div
-  data-qa="component-a"
+  data-qa="component01"
 >
   <div
     class="c0"
@@ -24,7 +24,7 @@ exports[`styled components > 02 - returning styled component 1`] = `
 
 <div
   class="c0"
-  data-qa="component-a"
+  data-qa="component02"
 >
   xxx
 </div>
@@ -37,9 +37,11 @@ exports[`styled components > 03 - returning styled component but with useMemo ab
 
 <div
   class="c0"
-  data-qa="component-a"
+  data-qa="styled-a"
 >
-  <div>
+  <div
+    data-qa="component03"
+  >
     xxx
   </div>
 </div>
