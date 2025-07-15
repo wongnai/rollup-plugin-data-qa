@@ -11,4 +11,7 @@ yarn example:install
 
 # Start development
 yarn dev
+
+# Start development while updating snapshots
+yarn dev -u
 ```

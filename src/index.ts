@@ -55,8 +55,9 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 						// skip the same node that we are processing, to prevent infinite loop
 						if (startPosition === node.start) return
 
-						// skip react fragment and all its children
-						if (isReactFragment(node)) return this.skip()
+						// skip react fragment ex: `<></>`
+						// skip object expression ex: `{}`
+						if (isReactFragment(node) || node.type === 'ObjectExpression') return this.skip()
 
 						if (isReactNode(node) && inputNodeName) {
 							const formattedName = formatName(inputNodeName, format)
@@ -105,6 +106,9 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 							if (isInjected) {
 								styledComponentName = ''
+
+								// skip processing the children of styled component
+								return this.skip()
 							}
 						}
 					},
