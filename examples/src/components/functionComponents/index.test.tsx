@@ -16,6 +16,8 @@ import Component14 from './Component14'
 import Component15 from './Component15'
 import Component16 from './Component16'
 import Component17 from './Component17'
+import Component18 from './Component18'
+import Component19 from './Component19'
 
 describe('function components', () => {
 	it('01 - simple arrow function', () => {
@@ -138,5 +140,21 @@ describe('function components', () => {
 
 		expect(container.firstChild).toMatchSnapshot()
 		expect(screen.queryAllByDataQa(/.*/g)).toHaveLength(0)
+	})
+
+	it('18 - component with a variable in function scope', () => {
+		const { container } = render(<Component18 />)
+
+		expect(container.firstChild).toMatchSnapshot()
+		expect(screen.getByDataQa('component18')).toBeVisible()
+		expect(screen.queryByDataQa('x')).not.toBeInTheDocument()
+	})
+
+	it('19 - component calling a custom hook', () => {
+		const { container } = render(<Component19 />)
+
+		expect(container.firstChild).toMatchSnapshot()
+		expect(screen.getByDataQa('component19')).toBeVisible()
+		expect(screen.queryAllByDataQa(/.*/)).toHaveLength(1)
 	})
 })

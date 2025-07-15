@@ -158,3 +158,27 @@ HTMLCollection [
 `;
 
 exports[`function components > 17 - component with JSX const but returns null 1`] = `null`;
+
+exports[`function components > 18 - component with a variable in function scope 1`] = `
+<div
+  data-qa="component18"
+>
+  <div>
+    xxx
+  </div>
+</div>
+`;
+
+exports[`function components > 19 - component calling a custom hook 1`] = `
+<div
+  class="default"
+  data-qa="component19"
+>
+  <div>
+    <svg />
+  </div>
+  <div>
+    labelDefault
+  </div>
+</div>
+`;
