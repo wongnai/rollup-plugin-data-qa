@@ -7,7 +7,7 @@
 yarn
 
 # Setup example project
-yarn example:setup
+yarn example:install
 
 # Start development
 yarn dev

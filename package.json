@@ -34,7 +34,7 @@
     "lint:fix": "eslint --ext .tsx,.ts --fix src",
     "test": "jest",
     "dev": "nodemon",
-    "example:setup": "cd examples && yarn install",
+    "example:install": "cd examples && yarn install",
     "example:sync": "cd examples && yarn sync",
     "example:test": "cd examples && yarn test",
     "type-check": "tsc --noEmit",
