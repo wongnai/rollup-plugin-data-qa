@@ -45,34 +45,6 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 			const magicString = new MagicString(code)
 
-			if (!disabledStyledComponent) {
-				let styledComponentName = ''
-
-				walk(ast, {
-					enter(node, parent) {
-						// skip react node and all its children for better performance
-						if (isReactNode(node)) return this.skip()
-
-						styledComponentName = getStyledComponentName(node) || styledComponentName
-
-						if (styledComponentName) {
-							const formattedStyledComponentName = formatName(styledComponentName, format)
-
-							const isInjected = injectStyledComponent({
-								code: magicString,
-								styledComponentName: formattedStyledComponentName,
-								node,
-								parent,
-							})
-
-							if (isInjected) {
-								styledComponentName = ''
-							}
-						}
-					},
-				})
-			}
-
 			const processReactFunctionComponent = (
 				inputNode: BaseNode,
 				inputNodeName?: string,
@@ -109,6 +81,34 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 			if (!disabledReactFunctionComponent) {
 				processReactFunctionComponent(ast)
+			}
+
+			if (!disabledStyledComponent) {
+				let styledComponentName = ''
+
+				walk(ast, {
+					enter(node, parent) {
+						// skip react node and all its children for better performance
+						if (isReactNode(node)) return this.skip()
+
+						styledComponentName = getStyledComponentName(node) || styledComponentName
+
+						if (styledComponentName) {
+							const formattedStyledComponentName = formatName(styledComponentName, format)
+
+							const isInjected = injectStyledComponent({
+								code: magicString,
+								styledComponentName: formattedStyledComponentName,
+								node,
+								parent,
+							})
+
+							if (isInjected) {
+								styledComponentName = ''
+							}
+						}
+					},
+				})
 			}
 
 			if (!magicString.hasChanged()) return UNCHANGED
