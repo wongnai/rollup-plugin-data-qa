@@ -1,6 +1,5 @@
 import { createFilter } from '@rollup/pluginutils'
 import { BaseNode, walk } from 'estree-walker'
-import { isEmpty, last } from 'lodash'
 import MagicString from 'magic-string'
 import { PluginImpl } from 'rollup'
 
@@ -8,8 +7,9 @@ import { UNCHANGED } from 'pluginConstants'
 import { InjectDataQaParams } from 'types'
 import ensureArray from 'utils/ensureArray'
 import formatName from 'utils/formatName'
-import findFunctionComponentName from 'utils/magicString/react/findFunctionComponentName'
-import getStyledComponentName from 'utils/magicString/react/findStyledComponentName'
+import isReactNode from 'utils/react/isReactNode'
+import isReactFragment from 'utils/react/isReactFragment'
+import getStyledComponentName from 'utils/react/findStyledComponentName'
 
 import injectReactFunctionComponent from 'core/injectReactFunctionComponent'
 import injectStyledComponent from 'core/injectStyledComponent'
@@ -35,84 +35,94 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 		const filter = createFilter([...input, ...ensureArray(include)], exclude)
 
-		if (!filter(id)) {
-			return UNCHANGED
-		}
-
-		const parse = this.parse.bind(this)
-		let ast: BaseNode | undefined
-		let magicString: MagicString | undefined
+		if (!filter(id)) UNCHANGED
 
 		try {
-			ast = parse(code)
+			const parse = this.parse.bind(this)
+			const ast: BaseNode = parse(code)
+
+			if (!ast) return UNCHANGED
+
+			const magicString = new MagicString(code)
+
+			if (!disabledStyledComponent) {
+				let styledComponentName = ''
+
+				walk(ast, {
+					enter(node, parent) {
+						// skip react node and all its children for better performance
+						if (isReactNode(node)) return this.skip()
+
+						styledComponentName = getStyledComponentName(node) || styledComponentName
+
+						if (styledComponentName) {
+							const formattedStyledComponentName = formatName(styledComponentName, format)
+
+							const isInjected = injectStyledComponent({
+								code: magicString,
+								styledComponentName: formattedStyledComponentName,
+								node,
+								parent,
+							})
+
+							if (isInjected) {
+								styledComponentName = ''
+							}
+						}
+					},
+				})
+			}
+
+			const processReactFunctionComponent = (
+				inputNode: BaseNode,
+				inputNodeName?: string,
+				startPosition?: number,
+			) => {
+				walk(inputNode, {
+					enter(node: any) {
+						// skip the same node that we are processing, to prevent infinite loop
+						if (startPosition === node.start) return
+
+						// skip react fragment and all its children
+						if (isReactFragment(node)) return this.skip()
+
+						if (isReactNode(node) && inputNodeName) {
+							const formattedName = formatName(inputNodeName, format)
+							injectReactFunctionComponent({
+								code: magicString,
+								componentName: formattedName,
+								node,
+							})
+
+							// skip processing the children of react node
+							return this.skip()
+						}
+
+						const nodeName = node.id?.name
+
+						if (nodeName) {
+							processReactFunctionComponent(node, nodeName, node.start)
+						}
+					},
+				})
+			}
+
+			if (!disabledReactFunctionComponent) {
+				processReactFunctionComponent(ast)
+			}
+
+			if (!magicString.hasChanged()) return UNCHANGED
+
+			return {
+				code: magicString.toString(),
+				map: magicString.generateMap({
+					file: id,
+					includeContent: true,
+					hires: true,
+				}),
+			}
 		} catch (error) {
 			this.warn(`${id} - ${error}`)
-		}
-
-		if (!ast) return UNCHANGED
-
-		let styledComponentName = ''
-		const functionComponentNames: string[] = []
-
-		walk(ast, {
-			enter(node, parent) {
-				magicString = magicString || new MagicString(code)
-
-				if (!disabledReactFunctionComponent) {
-					const functionComponentName = findFunctionComponentName({ node, parent })
-
-					if (functionComponentName && !functionComponentNames.includes(functionComponentName)) {
-						functionComponentNames.push(functionComponentName)
-					}
-
-					if (!isEmpty(functionComponentNames)) {
-						const componentName = formatName(last(functionComponentNames)!, format)
-
-						const isInjected = injectReactFunctionComponent({
-							code: magicString,
-							componentName,
-							node,
-							parent,
-						})
-
-						if (isInjected) {
-							functionComponentNames.pop()
-						}
-					}
-				}
-
-				if (!disabledStyledComponent) {
-					styledComponentName = getStyledComponentName(node) || styledComponentName
-
-					if (styledComponentName) {
-						const formattedStyledComponentName = formatName(styledComponentName, format)
-
-						const isInjected = injectStyledComponent({
-							code: magicString,
-							styledComponentName: formattedStyledComponentName,
-							node,
-							parent,
-						})
-
-						if (isInjected) {
-							styledComponentName = ''
-						}
-					}
-				}
-			},
-		})
-
-		if (!magicString) {
-			return UNCHANGED
-		}
-
-		return {
-			code: magicString.toString(),
-			map: magicString.generateMap({
-				file: id,
-				includeContent: true,
-				hires: true,
-			}),
 		}
 	},
 })

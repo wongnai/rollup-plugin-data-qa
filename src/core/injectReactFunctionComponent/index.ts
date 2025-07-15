@@ -6,22 +6,16 @@ import isObjectAssigning from 'utils/isObjectAssigning'
 import appendObject from 'utils/magicString/appendObject'
 import insertToObject from 'utils/magicString/insertToObject'
 import overwriteWithObject from 'utils/magicString/overwriteWithObject'
-import isReactNode from 'utils/magicString/react/isReactNode'
+import isReactNode from 'utils/react/isReactNode'
 
 type Params = {
 	node: Record<string, any>
-	parent: Record<string, any> | null
 	code: MagicString
 	componentName: string
 }
 
-export default function injectReactFunctionComponent({
-	node,
-	parent,
-	code,
-	componentName,
-}: Params) {
-	if (!isReactNode(node) || parent?.type === 'CallExpression') return false
+export default function injectReactFunctionComponent({ node, code, componentName }: Params) {
+	if (!isReactNode(node)) return false
 
 	const tagProps = node.arguments[1]
 
