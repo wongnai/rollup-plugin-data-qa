@@ -55,7 +55,7 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 		const functionComponentNames: string[] = []
 
 		walk(ast, {
-			enter(node: Record<string, any>, parent: Record<string, any>) {
+			enter(node, parent) {
 				magicString = magicString || new MagicString(code)
 
 				if (!disabledReactFunctionComponent) {
@@ -66,14 +66,18 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 					}
 
 					if (!isEmpty(functionComponentNames)) {
+						const componentName = formatName(last(functionComponentNames)!, format)
+
 						const isInjected = injectReactFunctionComponent({
 							code: magicString,
-							componentName: formatName(last(functionComponentNames)!, format),
+							componentName,
 							node,
 							parent,
 						})
 
-						isInjected && functionComponentNames.pop()
+						if (isInjected) {
+							functionComponentNames.pop()
+						}
 					}
 				}
 
@@ -81,9 +85,11 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 					styledComponentName = getStyledComponentName(node) || styledComponentName
 
 					if (styledComponentName) {
+						const formattedStyledComponentName = formatName(styledComponentName, format)
+
 						const isInjected = injectStyledComponent({
 							code: magicString,
-							styledComponentName: formatName(styledComponentName, format),
+							styledComponentName: formattedStyledComponentName,
 							node,
 							parent,
 						})
