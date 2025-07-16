@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.16](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.15...v1.0.16) (2025-07-16)
+
+
+### Features
+
+* add example repo with test cases ([#9](https://github.com/wongnai/rollup-plugin-data-qa/issues/9)) ([725e6a7](https://github.com/wongnai/rollup-plugin-data-qa/commit/725e6a7cbf326f7aeaab25798df772ce02ef58d1))
+
 ## [1.0.15](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.14...v1.0.15) (2024-10-11)
 
 
