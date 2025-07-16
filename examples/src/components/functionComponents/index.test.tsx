@@ -106,12 +106,16 @@ describe('function components', () => {
 		const { container } = render(<Component12 />)
 
 		expect(container.firstChild).toMatchSnapshot()
+		expect(screen.getByDataQa('component-b')).toBeVisible()
+		expect(screen.queryByDataQa('component12')).not.toBeInTheDocument()
 	})
 
 	it('13 - with a function component with spreaded props', () => {
 		const { container } = render(<Component13 />)
 
 		expect(container.firstChild).toMatchSnapshot()
+		expect(screen.getByDataQa('component13')).toBeVisible()
+		expect(screen.queryByDataQa('component-b')).not.toBeInTheDocument()
 	})
 
 	it('14 - wrapped with forwardRef', () => {
