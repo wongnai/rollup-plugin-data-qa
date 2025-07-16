@@ -1,0 +1,156 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`styled components > 01 - styled component in a div 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  data-qa="component01"
+>
+  <div
+    class="c0"
+    data-qa="styled-a"
+  >
+    xxx
+  </div>
+</div>
+`;
+
+exports[`styled components > 02 - returning styled component 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0"
+  data-qa="component02"
+>
+  xxx
+</div>
+`;
+
+exports[`styled components > 03 - returning styled component but with useMemo above 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0"
+  data-qa="styled-a"
+>
+  <div
+    data-qa="component03"
+  >
+    xxx
+  </div>
+</div>
+`;
+
+exports[`styled components > 04 - component with attrs 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0 a"
+  data-qa="styled-a"
+>
+  xxx
+</div>
+`;
+
+exports[`styled components > 05 - styled styled component 1`] = `
+.c0 {
+  color: blue;
+}
+
+.c1 {
+  color: red;
+}
+
+<div
+  class="c0 c1"
+  data-qa="component05"
+>
+  <div
+    class="c0 c1"
+    data-qa="styled-b"
+  >
+    aaa
+  </div>
+  <div
+    class="c0"
+    data-qa="styled-b"
+  >
+    bbb
+  </div>
+</div>
+`;
+
+exports[`styled components > 06 - styled styled component with attrs 1`] = `
+.c0 {
+  color: blue;
+}
+
+.c1 {
+  color: red;
+}
+
+<div
+  class="c0 c1 b a"
+  data-qa="styled-a"
+>
+  <div
+    class="c0 c1 b a"
+    data-qa="styled-a"
+  >
+    xxx
+  </div>
+  <div
+    class="c0 b"
+    data-qa="styled-b"
+  >
+    xxx
+  </div>
+</div>
+`;
+
+exports[`styled components > 07 - styled with props function in attrs 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0 a"
+  data-qa="component07"
+>
+  <div
+    class="c0 a"
+    data-qa="styled-a"
+  >
+    xxx
+  </div>
+</div>
+`;
+
+exports[`styled components > 08 - component with custom hook that returns object with styled component 1`] = `
+.c0 {
+  color: green;
+}
+
+<div
+  class="default"
+  data-qa="component08"
+>
+  <div>
+    <svg
+      class="c0"
+      data-qa="icon-default"
+    />
+  </div>
+  <div>
+    labelDefault
+  </div>
+</div>
+`;
