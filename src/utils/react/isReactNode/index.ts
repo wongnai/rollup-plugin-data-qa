@@ -1,5 +1,5 @@
 import { JSX_CALLEE_NAMES } from 'pluginConstants'
-import isReactFragment from '../isReactFragment'
+import isReactFragment from 'utils/react/isReactFragment'
 
 export default function isReactNode(node: Record<string, any>) {
 	const isReactCreateElement =

@@ -35,13 +35,14 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 
 		const filter = createFilter([...input, ...ensureArray(include)], exclude)
 
-		if (!filter(id)) UNCHANGED
+		if (!filter(id)) {
+			return UNCHANGED
+		}
 
 		try {
 			const parse = this.parse.bind(this)
-			const ast: BaseNode = parse(code)
 
-			if (!ast) return UNCHANGED
+			const ast: BaseNode = parse(code)
 
 			const magicString = new MagicString(code)
 
@@ -115,7 +116,9 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 				})
 			}
 
-			if (!magicString.hasChanged()) return UNCHANGED
+			if (!magicString.hasChanged()) {
+				return UNCHANGED
+			}
 
 			return {
 				code: magicString.toString(),
