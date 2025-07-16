@@ -8,12 +8,8 @@ const config = defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
-		forceRerunTriggers: ['../dist/**'],
 		setupFiles: ['./vitest.setup.ts'],
 		reporters: ['verbose'],
-	},
-	optimizeDeps: {
-		include: ['rollup-plugin-data-qa'],
 	},
 })
 
