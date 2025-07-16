@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { injectDataQa } from 'rollup-plugin-data-qa'
-import {} from '@testing-library/react'
 
 // https://vite.dev/config/
 const config = defineConfig({

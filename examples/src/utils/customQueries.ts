@@ -7,6 +7,7 @@ const queryAllByDataQa = (container: HTMLElement, id: Matcher, options?: Matcher
 
 const getMultipleError = (_: unknown, dataQaValue: string) =>
 	`Found multiple elements with the ${QA_TEST_ID_ATTRIBUTE} attribute of: ${dataQaValue}`
+
 const getMissingError = (_: unknown, dataQaValue: string) =>
 	`Unable to find an element with the ${QA_TEST_ID_ATTRIBUTE} attribute of: ${dataQaValue}`
 
