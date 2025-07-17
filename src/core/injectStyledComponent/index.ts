@@ -9,14 +9,14 @@ type Params = {
 	code: MagicString
 	styledComponentName: string
 	node: Record<string, any>
-	parent: Record<string, any>
+	parent: Record<string, any> | null
 }
 
 export default function injectStyledComponent({ styledComponentName, node, parent, code }: Params) {
 	if (
 		node?.type === 'MemberExpression' &&
 		node?.object.name === 'styled' &&
-		parent.property?.name !== 'attrs'
+		parent?.property?.name !== 'attrs'
 	) {
 		chainFunctionWithProps({
 			code,
@@ -26,7 +26,9 @@ export default function injectStyledComponent({ styledComponentName, node, paren
 		})
 
 		return true
-	} else if (
+	}
+
+	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ArrowFunctionExpression' &&
 		!isEmpty(node.body.properties)
@@ -40,7 +42,9 @@ export default function injectStyledComponent({ styledComponentName, node, paren
 		})
 
 		return true
-	} else if (
+	}
+
+	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ObjectExpression' &&
 		!isEmpty(node.properties)

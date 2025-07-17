@@ -37,10 +37,10 @@ exports[`styled components > 03 - returning styled component but with useMemo ab
 
 <div
   class="c0"
-  data-qa="styled-a"
+  data-qa="component03"
 >
   <div
-    data-qa="component03"
+    data-qa="b"
   >
     xxx
   </div>

@@ -39,9 +39,11 @@ exports[`function components > 04 - with a const element in function scope 1`] =
 `;
 
 exports[`function components > 05 - with a useCallback element in function scope 1`] = `
-<div>
+<div
+  data-qa="component05"
+>
   <div
-    data-qa="component05"
+    data-qa="b"
   >
     xxx
   </div>
@@ -49,9 +51,11 @@ exports[`function components > 05 - with a useCallback element in function scope
 `;
 
 exports[`function components > 06 - with a useMemo in function scope 1`] = `
-<div>
+<div
+  data-qa="component06"
+>
   <div
-    data-qa="component06"
+    data-qa="b"
   >
     xxx
   </div>
@@ -71,14 +75,16 @@ exports[`function components > 07 - with a function component child element 1`] 
 `;
 
 exports[`function components > 08 - with list of elements in useMemo 1`] = `
-<div>
+<div
+  data-qa="component08"
+>
   <div
-    data-qa="component08"
+    data-qa="list"
   >
     xxx
   </div>
   <div
-    data-qa="component08"
+    data-qa="list"
   >
     yyy
   </div>
@@ -98,10 +104,14 @@ HTMLCollection [
 
 exports[`function components > 10 - fragment with list of elements in a const 1`] = `
 HTMLCollection [
-  <div>
+  <div
+    data-qa="list"
+  >
     xxx
   </div>,
-  <div>
+  <div
+    data-qa="list"
+  >
     yyy
   </div>,
 ]
@@ -109,10 +119,14 @@ HTMLCollection [
 
 exports[`function components > 11 - fragment with list of elements in useMemo 1`] = `
 HTMLCollection [
-  <div>
+  <div
+    data-qa="list"
+  >
     xxx
   </div>,
-  <div>
+  <div
+    data-qa="list"
+  >
     yyy
   </div>,
 ]
@@ -135,7 +149,9 @@ exports[`function components > 13 - with a function component with spreaded prop
 `;
 
 exports[`function components > 14 - wrapped with forwardRef 1`] = `
-<div>
+<div
+  data-qa="component14"
+>
   xxx
 </div>
 `;
@@ -148,10 +164,14 @@ HTMLCollection [
 
 exports[`function components > 16 - fragment with list of elements from const 1`] = `
 HTMLCollection [
-  <div>
+  <div
+    data-qa="list"
+  >
     1
   </div>,
-  <div>
+  <div
+    data-qa="list"
+  >
     2
   </div>,
 ]
