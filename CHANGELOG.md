@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.17](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.16...v1.0.17) (2025-07-17)
+
+
+### Bug Fixes
+
+* handle useMemo, useCallback, forwardRef, list of elements ([#10](https://github.com/wongnai/rollup-plugin-data-qa/issues/10)) ([5987f41](https://github.com/wongnai/rollup-plugin-data-qa/commit/5987f41c77cdca94e2cf773a3159e9e28eef8904))
+
 ## [1.0.16](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.15...v1.0.16) (2025-07-16)
 
 
