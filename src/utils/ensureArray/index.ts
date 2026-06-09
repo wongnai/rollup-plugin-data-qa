@@ -1,9 +1,7 @@
-import { isArray, isNaN, isNil } from 'lodash'
-
-export default function ensureArray(value?: any) {
-	if (isNaN(value) || isNil(value)) {
+export default function ensureArray<T>(value?: T | T[]): T[] {
+	if (value == null || (typeof value === 'number' && Number.isNaN(value))) {
 		return []
 	}
 
-	return isArray(value) ? value : [value]
+	return Array.isArray(value) ? value : [value]
 }

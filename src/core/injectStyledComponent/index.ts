@@ -1,5 +1,3 @@
-import { isEmpty, head } from 'lodash'
-
 import { DATA_QA } from 'pluginConstants'
 import appendObject from 'utils/magicString/appendObject'
 import chainFunctionWithProps from 'utils/magicString/chainFunctionWithProps'
@@ -14,7 +12,7 @@ export default function injectStyledComponent({
 }: InjectStyledComponentParams) {
 	if (
 		node?.type === 'MemberExpression' &&
-		styledComponentNames.includes(node?.object.name) &&
+		styledComponentNames.has(node?.object.name) &&
 		parent?.property?.name !== 'attrs'
 	) {
 		chainFunctionWithProps({
@@ -30,13 +28,13 @@ export default function injectStyledComponent({
 	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ArrowFunctionExpression' &&
-		!isEmpty(node.body.properties)
+		node.body.properties?.length
 	) {
 		const properties = node.body.properties as Record<string, any>[]
 
 		appendObject({
 			code,
-			startPosition: head(properties)!.start,
+			startPosition: properties[0]!.start,
 			attrs: { [DATA_QA]: styledComponentName },
 		})
 
@@ -46,13 +44,13 @@ export default function injectStyledComponent({
 	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ObjectExpression' &&
-		!isEmpty(node.properties)
+		node.properties?.length
 	) {
 		const properties = node.properties as Record<string, any>[]
 
 		appendObject({
 			code,
-			startPosition: head(properties)!.start,
+			startPosition: properties[0]!.start,
 			attrs: { [DATA_QA]: styledComponentName },
 		})
 

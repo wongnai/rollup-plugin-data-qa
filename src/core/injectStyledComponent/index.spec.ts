@@ -8,7 +8,7 @@ describe('injectStyledComponent()', () => {
 	const defaultParams = {
 		code: new MagicString(''),
 		styledComponentName: 'styled-button',
-		styledComponentNames: ['styled'],
+		styledComponentNames: new Set(['styled']),
 		parent: null,
 	}
 
@@ -28,7 +28,7 @@ describe('injectStyledComponent()', () => {
 		const result = injectStyledComponent({
 			code: magicString,
 			styledComponentName: 'styled-button',
-			styledComponentNames: ['styled'],
+			styledComponentNames: new Set(['styled']),
 			node: {
 				type: 'MemberExpression',
 				object: { name: 'styled' },
@@ -65,7 +65,7 @@ describe('injectStyledComponent()', () => {
 		const result = injectStyledComponent({
 			code: magicString,
 			styledComponentName: 'styled-button',
-			styledComponentNames: ['styled'],
+			styledComponentNames: new Set(['styled']),
 			node: {
 				type: 'ArrowFunctionExpression',
 				body: {
@@ -93,7 +93,7 @@ describe('injectStyledComponent()', () => {
 		const result = injectStyledComponent({
 			code: magicString,
 			styledComponentName: 'styled-button',
-			styledComponentNames: ['styled'],
+			styledComponentNames: new Set(['styled']),
 			node: {
 				type: 'ObjectExpression',
 				properties: [{ start: colorStart }],
