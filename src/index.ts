@@ -1,19 +1,24 @@
 import MagicString from 'magic-string'
-import { PluginImpl, TransformPluginContext } from 'rollup'
 
 import {
 	DEFAULT_STYLED_COMPONENT_NAMES,
 	TRANSFORM_HOOK_ID_FILTER,
 	UNCHANGED,
 } from 'pluginConstants'
-import { InjectDataQaParams } from 'types'
+import { InjectDataQaParams, InjectDataQaPlugin, PluginTransformContext } from 'types'
 import createModuleFilter from 'utils/createModuleFilter'
 import getParseOptions from 'utils/getParseOptions'
 import mightNeedTransform from 'utils/mightNeedTransform'
 import shouldProcessModule from 'utils/shouldProcessModule'
 import transformAst from 'utils/transformAst'
 
-export type { FormatType, InjectDataQaOptions, InjectDataQaParams } from 'types'
+export type {
+	FormatType,
+	InjectDataQaOptions,
+	InjectDataQaParams,
+	InjectDataQaPlugin,
+	PluginTransformContext,
+} from 'types'
 
 let input: string[] = []
 let moduleFilter = createModuleFilter({ input: [], include: [], exclude: [] })
@@ -23,7 +28,7 @@ const getModuleId = (id: string) => id.split('?')[0]
 const matchesTransformHookId = (id: string) =>
 	TRANSFORM_HOOK_ID_FILTER.some(pattern => pattern.test(getModuleId(id)))
 
-export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
+export const injectDataQa = ({
 	format = 'paramCase',
 	include = [],
 	exclude = [],
@@ -32,7 +37,7 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 		disabledStyledComponent,
 		styledComponentNames = DEFAULT_STYLED_COMPONENT_NAMES,
 	} = {},
-}: InjectDataQaParams = {}) => {
+}: InjectDataQaParams = {}): InjectDataQaPlugin => {
 	const rebuildModuleFilter = () => {
 		moduleFilter = createModuleFilter({
 			input,
@@ -42,7 +47,7 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 	}
 
 	const transformModule = function transformModule(
-		this: TransformPluginContext,
+		this: PluginTransformContext,
 		code: string,
 		id: string,
 	) {

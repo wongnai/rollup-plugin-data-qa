@@ -12,3 +12,21 @@ export interface InjectDataQaOptions {
 	disabledReactFunctionComponent?: boolean
 	styledComponentNames?: string[]
 }
+
+export interface PluginTransformContext {
+	parse: (input: string, options?: Record<string, unknown>) => unknown
+	warn: (message: string) => void
+}
+
+export interface InjectDataQaPlugin {
+	name: string
+	options?: (
+		this: PluginTransformContext,
+		options: Record<string, unknown>,
+	) => Record<string, unknown> | void
+	transform?: (
+		this: PluginTransformContext,
+		code: string,
+		id: string,
+	) => null | { code: string; map?: unknown }
+}
