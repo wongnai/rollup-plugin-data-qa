@@ -3,7 +3,7 @@ import { BaseNode, walk } from 'estree-walker'
 import MagicString from 'magic-string'
 import { PluginImpl } from 'rollup'
 
-import { UNCHANGED } from 'pluginConstants'
+import { DEFAULT_STYLED_COMPONENT_NAMES, UNCHANGED } from 'pluginConstants'
 import { InjectDataQaParams } from 'types'
 import ensureArray from 'utils/ensureArray'
 import formatName from 'utils/formatName'
@@ -24,7 +24,11 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 	format = 'paramCase',
 	include = [],
 	exclude = [],
-	options: { disabledReactFunctionComponent, disabledStyledComponent } = {},
+	options: {
+		disabledReactFunctionComponent,
+		disabledStyledComponent,
+		styledComponentNames = DEFAULT_STYLED_COMPONENT_NAMES,
+	} = {},
 }: InjectDataQaParams = {}) => ({
 	name: 'rollup-plugin-data-qa',
 	options: options => {
@@ -120,6 +124,7 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 							const isInjected = injectStyledComponent({
 								code: magicString,
 								styledComponentName: formattedStyledComponentName,
+								styledComponentNames,
 								node,
 								parent,
 							})

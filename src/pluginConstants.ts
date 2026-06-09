@@ -7,3 +7,5 @@ export const DATA_QA = 'data-qa'
 export const JSX_CALLEE_NAMES = ['jsxDEV', 'jsx', '_jsx', 'jsxs', '_jsxs']
 
 export const FRAGMENT_NAMES = ['Fragment', '_Fragment']
+
+export const DEFAULT_STYLED_COMPONENT_NAMES = ['styled']

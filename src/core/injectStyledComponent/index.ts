@@ -8,14 +8,21 @@ import chainFunctionWithProps from 'utils/magicString/chainFunctionWithProps'
 type Params = {
 	code: MagicString
 	styledComponentName: string
+	styledComponentNames: string[]
 	node: Record<string, any>
 	parent: Record<string, any> | null
 }
 
-export default function injectStyledComponent({ styledComponentName, node, parent, code }: Params) {
+export default function injectStyledComponent({
+	styledComponentName,
+	styledComponentNames,
+	node,
+	parent,
+	code,
+}: Params) {
 	if (
 		node?.type === 'MemberExpression' &&
-		node?.object.name === 'styled' &&
+		styledComponentNames.includes(node?.object.name) &&
 		parent?.property?.name !== 'attrs'
 	) {
 		chainFunctionWithProps({
