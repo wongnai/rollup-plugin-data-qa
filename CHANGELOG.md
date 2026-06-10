@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.20](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.19...v1.0.20) (2026-06-10)
+
+
+### Bug Fixes
+
+* fix release config ([#13](https://github.com/wongnai/rollup-plugin-data-qa/issues/13)) ([d9afd20](https://github.com/wongnai/rollup-plugin-data-qa/commit/d9afd20fa4058b9424ae56fbcb20c914c6d132b1))
+
 ## [1.0.19](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.18...v1.0.19) (2026-06-10)
 
 ## [1.0.18](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.17...v1.0.18) (2026-06-10)
