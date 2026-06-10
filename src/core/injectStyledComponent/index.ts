@@ -1,17 +1,9 @@
 import { isEmpty, head } from 'lodash'
-import MagicString from 'magic-string'
 
 import { DATA_QA } from 'pluginConstants'
 import appendObject from 'utils/magicString/appendObject'
 import chainFunctionWithProps from 'utils/magicString/chainFunctionWithProps'
-
-type Params = {
-	code: MagicString
-	styledComponentName: string
-	styledComponentNames: string[]
-	node: Record<string, any>
-	parent: Record<string, any> | null
-}
+import { InjectStyledComponentParams } from './types'
 
 export default function injectStyledComponent({
 	styledComponentName,
@@ -19,7 +11,7 @@ export default function injectStyledComponent({
 	node,
 	parent,
 	code,
-}: Params) {
+}: InjectStyledComponentParams) {
 	if (
 		node?.type === 'MemberExpression' &&
 		styledComponentNames.includes(node?.object.name) &&

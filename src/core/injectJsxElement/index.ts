@@ -1,16 +1,9 @@
-import MagicString from 'magic-string'
-
 import { DATA_QA } from 'pluginConstants'
 import appendJsxSpreadAttribute from 'utils/magicString/appendJsxSpreadAttribute'
 import isJsxElement from 'utils/react/isJsxElement'
+import { InjectJsxElementParams } from './types'
 
-type Params = {
-	node: Record<string, any>
-	code: MagicString
-	componentName: string
-}
-
-export default function injectJsxElement({ node, code, componentName }: Params) {
+export default function injectJsxElement({ node, code, componentName }: InjectJsxElementParams) {
 	if (!isJsxElement(node)) {
 		return false
 	}
