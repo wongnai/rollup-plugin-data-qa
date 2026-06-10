@@ -1,5 +1,17 @@
 # Changelog
 
+# [2.0.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.20...v2.0.0) (2026-06-10)
+
+
+### chore
+
+* bump major version ([#14](https://github.com/wongnai/rollup-plugin-data-qa/issues/14)) ([fd6425f](https://github.com/wongnai/rollup-plugin-data-qa/commit/fd6425f58323ee108303bad5e5140923ac362654))
+
+
+### BREAKING CHANGES
+
+* support rolldown & migrate to use rolldown
+
 ## [1.0.20](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.19...v1.0.20) (2026-06-10)
 
 
