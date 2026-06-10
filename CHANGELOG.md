@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.18](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.17...v1.0.18) (2026-06-10)
+
+
+### Features
+
+* migrate to rolldown ([#12](https://github.com/wongnai/rollup-plugin-data-qa/issues/12)) ([e9a6a07](https://github.com/wongnai/rollup-plugin-data-qa/commit/e9a6a07c90a9e5563eb3e97873b8fda08a7b212d))
+* support rolldown & support custom styled-component alias ([#11](https://github.com/wongnai/rollup-plugin-data-qa/issues/11)) ([d7c027c](https://github.com/wongnai/rollup-plugin-data-qa/commit/d7c027c16240e97ac0fe70bb51f4aac9cc88300f))
+
+
+### BREAKING CHANGES
+
+* The old MySQL connection string format is no longer supported
+
 ## [1.0.17](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.16...v1.0.17) (2025-07-17)
 
 
