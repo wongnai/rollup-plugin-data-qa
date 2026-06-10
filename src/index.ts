@@ -1,26 +1,34 @@
-import { createFilter } from '@rollup/pluginutils'
-import { BaseNode, walk } from 'estree-walker'
 import MagicString from 'magic-string'
-import { PluginImpl } from 'rollup'
 
-import { DEFAULT_STYLED_COMPONENT_NAMES, UNCHANGED } from 'pluginConstants'
-import { InjectDataQaParams } from 'types'
-import ensureArray from 'utils/ensureArray'
-import formatName from 'utils/formatName'
+import {
+	DEFAULT_STYLED_COMPONENT_NAMES,
+	TRANSFORM_HOOK_ID_FILTER,
+	UNCHANGED,
+} from 'pluginConstants'
+import { InjectDataQaParams, InjectDataQaPlugin, PluginTransformContext } from 'types'
+import createModuleFilter from 'utils/createModuleFilter'
 import getParseOptions from 'utils/getParseOptions'
+import mightNeedTransform from 'utils/mightNeedTransform'
 import shouldProcessModule from 'utils/shouldProcessModule'
-import isJsxElement from 'utils/react/isJsxElement'
-import isReactNode from 'utils/react/isReactNode'
-import isReactFragment from 'utils/react/isReactFragment'
-import getStyledComponentName from 'utils/react/findStyledComponentName'
+import transformAst from 'utils/transformAst'
 
-import injectJsxElement from 'core/injectJsxElement'
-import injectReactFunctionComponent from 'core/injectReactFunctionComponent'
-import injectStyledComponent from 'core/injectStyledComponent'
+export type {
+	FormatType,
+	InjectDataQaOptions,
+	InjectDataQaParams,
+	InjectDataQaPlugin,
+	PluginTransformContext,
+} from 'types'
 
 let input: string[] = []
+let moduleFilter = createModuleFilter({ input: [], include: [], exclude: [] })
 
-export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
+const getModuleId = (id: string) => id.split('?')[0]
+
+const matchesTransformHookId = (id: string) =>
+	TRANSFORM_HOOK_ID_FILTER.some(pattern => pattern.test(getModuleId(id)))
+
+export const injectDataQa = ({
 	format = 'paramCase',
 	include = [],
 	exclude = [],
@@ -29,116 +37,51 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 		disabledStyledComponent,
 		styledComponentNames = DEFAULT_STYLED_COMPONENT_NAMES,
 	} = {},
-}: InjectDataQaParams = {}) => ({
-	name: 'rollup-plugin-data-qa',
-	options: options => {
-		input = options.input ? Object.values(options.input) : []
+}: InjectDataQaParams = {}): InjectDataQaPlugin => {
+	const rebuildModuleFilter = () => {
+		moduleFilter = createModuleFilter({
+			input,
+			include,
+			exclude,
+		})
+	}
 
-		return options
-	},
-	transform(code, id) {
-		if (!input) {
-			this.error('not found input')
-		}
+	const transformModule = function transformModule(
+		this: PluginTransformContext,
+		code: string,
+		id: string,
+	) {
+		const moduleId = getModuleId(id)
 
-		const filter = createFilter([...input, ...ensureArray(include)], exclude)
-
-		if (!filter(id)) {
+		if (!shouldProcessModule(moduleId)) {
 			return UNCHANGED
 		}
 
-		if (!shouldProcessModule(id)) {
+		if (!moduleFilter(id)) {
+			return UNCHANGED
+		}
+
+		if (
+			!mightNeedTransform(code, {
+				disabledReactFunctionComponent,
+				disabledStyledComponent,
+			})
+		) {
 			return UNCHANGED
 		}
 
 		try {
-			const parse = this.parse.bind(this)
-
-			const ast: BaseNode = parse(code, getParseOptions(id))
-
+			const ast = this.parse(code, getParseOptions(moduleId))
 			const magicString = new MagicString(code)
 
-			if (!disabledReactFunctionComponent) {
-				const processReactFunctionComponent = (
-					inputNode: BaseNode,
-					inputNodeName?: string,
-					startPosition?: number,
-				) => {
-					walk(inputNode, {
-						enter(node: any) {
-							// skip the same node that we are processing, to prevent infinite loop
-							if (startPosition === node.start) return
-
-							// skip react fragment ex: `<></>`
-							// skip object expression ex: `{}`
-							if (isReactFragment(node) || node.type === 'ObjectExpression') {
-								return this.skip()
-							}
-
-							if ((isReactNode(node) || isJsxElement(node)) && inputNodeName) {
-								const formattedName = formatName(inputNodeName, format)
-
-								const injectElement = isJsxElement(node)
-									? injectJsxElement
-									: injectReactFunctionComponent
-
-								const isInjected = injectElement({
-									code: magicString,
-									componentName: formattedName,
-									node,
-								})
-
-								if (!isInjected) {
-									return
-								}
-
-								// skip processing the children of react node
-								return this.skip()
-							}
-
-							const nodeName = node.id?.name
-
-							if (nodeName) {
-								processReactFunctionComponent(node, nodeName, node.start)
-							}
-						},
-					})
-				}
-
-				processReactFunctionComponent(ast)
-			}
-
-			if (!disabledStyledComponent) {
-				let styledComponentName = ''
-
-				walk(ast, {
-					enter(node, parent) {
-						// skip react node and all its children for better performance
-						if (isReactNode(node) || isJsxElement(node)) return this.skip()
-
-						styledComponentName = getStyledComponentName(node) || styledComponentName
-
-						if (styledComponentName) {
-							const formattedStyledComponentName = formatName(styledComponentName, format)
-
-							const isInjected = injectStyledComponent({
-								code: magicString,
-								styledComponentName: formattedStyledComponentName,
-								styledComponentNames,
-								node,
-								parent,
-							})
-
-							if (isInjected) {
-								styledComponentName = ''
-
-								// skip processing the children of styled component
-								return this.skip()
-							}
-						}
-					},
-				})
-			}
+			transformAst({
+				ast,
+				code: magicString,
+				format,
+				disabledReactFunctionComponent,
+				disabledStyledComponent,
+				styledComponentNames,
+			})
 
 			if (!magicString.hasChanged()) {
 				return UNCHANGED
@@ -155,5 +98,24 @@ export const injectDataQa: PluginImpl<InjectDataQaParams> = ({
 		} catch (error) {
 			this.warn(`${id} - ${error}`)
 		}
-	},
-})
+	}
+
+	rebuildModuleFilter()
+
+	return {
+		name: 'rollup-plugin-data-qa',
+		options: options => {
+			input = options.input ? Object.values(options.input) : []
+			rebuildModuleFilter()
+
+			return options
+		},
+		transform(code, id) {
+			if (!matchesTransformHookId(id)) {
+				return UNCHANGED
+			}
+
+			return transformModule.call(this, code, id) || UNCHANGED
+		},
+	}
+}

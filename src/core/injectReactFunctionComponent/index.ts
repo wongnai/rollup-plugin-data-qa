@@ -1,5 +1,3 @@
-import { head, isEmpty } from 'lodash'
-
 import { DATA_QA } from 'pluginConstants'
 import isObjectAssigning from 'utils/isObjectAssigning'
 import appendObject from 'utils/magicString/appendObject'
@@ -17,7 +15,7 @@ export default function injectReactFunctionComponent({
 
 	const tagProps = node.arguments[1]
 
-	if (!tagProps?.start && isEmpty(tagProps.properties)) return false
+	if (!tagProps?.start && !tagProps?.properties?.length) return false
 
 	// NOTE: if a component has props, the value will always be undefined
 	const hasProps = tagProps.value !== null
@@ -34,7 +32,7 @@ export default function injectReactFunctionComponent({
 
 	// e.g `<svg>...</svg>`
 	if (isObjectAssigning(tagProps)) {
-		const firstArgs = head(tagProps.arguments as Record<string, any>[])
+		const firstArgs = tagProps.arguments?.[0] as Record<string, any> | undefined
 
 		if (!firstArgs) return false
 
@@ -47,7 +45,7 @@ export default function injectReactFunctionComponent({
 	}
 
 	// e.g `<div />`
-	if (isEmpty(tagProps.properties)) {
+	if (!tagProps.properties?.length) {
 		insertToObject({
 			code,
 			node: tagProps,
@@ -56,7 +54,7 @@ export default function injectReactFunctionComponent({
 		return true
 	}
 
-	const props = head(tagProps.properties as Record<string, any>[])
+	const props = tagProps.properties?.[0] as Record<string, any> | undefined
 
 	if (!props) return false
 

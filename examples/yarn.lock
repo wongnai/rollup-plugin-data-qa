@@ -1120,7 +1120,7 @@ json5@^2.2.3:
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-lodash@4.17.21, lodash@^4.17.21:
+lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -1313,12 +1313,11 @@ redent@^3.0.0:
     strip-indent "^3.0.0"
 
 "rollup-plugin-data-qa@file:../dist":
-  version "1.0.15"
+  version "1.0.17"
   dependencies:
     "@rollup/pluginutils" "5.2.0"
     change-case "4.1.2"
     estree-walker "2.0.2"
-    lodash "4.17.21"
     magic-string "0.30.17"
 
 rollup@^4.40.0:
