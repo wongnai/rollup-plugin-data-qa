@@ -1,5 +1,4 @@
 import { head, isEmpty } from 'lodash'
-import MagicString from 'magic-string'
 
 import { DATA_QA } from 'pluginConstants'
 import isObjectAssigning from 'utils/isObjectAssigning'
@@ -7,14 +6,13 @@ import appendObject from 'utils/magicString/appendObject'
 import insertToObject from 'utils/magicString/insertToObject'
 import overwriteWithObject from 'utils/magicString/overwriteWithObject'
 import isReactNode from 'utils/react/isReactNode'
+import { InjectReactFunctionComponentParams } from './types'
 
-type Params = {
-	node: Record<string, any>
-	code: MagicString
-	componentName: string
-}
-
-export default function injectReactFunctionComponent({ node, code, componentName }: Params) {
+export default function injectReactFunctionComponent({
+	node,
+	code,
+	componentName,
+}: InjectReactFunctionComponentParams) {
 	if (!isReactNode(node)) return false
 
 	const tagProps = node.arguments[1]

@@ -10,4 +10,5 @@ export interface InjectDataQaParams {
 export interface InjectDataQaOptions {
 	disabledStyledComponent?: boolean
 	disabledReactFunctionComponent?: boolean
+	styledComponentNames?: string[]
 }

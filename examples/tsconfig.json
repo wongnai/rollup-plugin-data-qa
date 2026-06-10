@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"lib": ["esnext", "dom"],
 		"module": "ESNext",
-		"moduleResolution": "Bundler",
+		"moduleResolution": "node",
 		"jsx": "react-jsx",
 		"types": ["react", "node", "vite/client", "vitest/globals", "vitest/jsdom"],
 		"strict": true,
