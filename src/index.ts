@@ -115,7 +115,7 @@ export const injectDataQa = ({
 				return UNCHANGED
 			}
 
-			return transformModule.call(this, code, id)
+			return transformModule.call(this, code, id) || UNCHANGED
 		},
 	}
 }
