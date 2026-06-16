@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.0.0...v2.0.1) (2026-06-16)
+
+
+### Bug Fixes
+
+* fix data-qa plugin build invalid on production build ([#15](https://github.com/wongnai/rollup-plugin-data-qa/issues/15)) ([93b8906](https://github.com/wongnai/rollup-plugin-data-qa/commit/93b8906d975f4ad4cf9d2921fefb6473b8db8e32))
+
 # [2.0.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v1.0.20...v2.0.0) (2026-06-10)
 
 
