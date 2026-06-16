@@ -70,7 +70,6 @@ const ComponentA = () => (
 ## Parameters
 ```ts
 interface InjectDataQaParams {
-	// by default inject-data-qa will use input that rollup retrieved
 	include?: string[] = null
 	exclude?: string[] = null
 	// this lib using [change-case](https://www.npmjs.com/package/change-case) to format data-qa attribute value.
