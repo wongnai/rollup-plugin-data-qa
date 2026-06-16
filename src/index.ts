@@ -20,9 +20,6 @@ export type {
 	PluginTransformContext,
 } from 'types'
 
-let input: string[] = []
-let moduleFilter = createModuleFilter({ input: [], include: [], exclude: [] })
-
 const getModuleId = (id: string) => id.split('?')[0]
 
 const matchesTransformHookId = (id: string) =>
@@ -38,13 +35,7 @@ export const injectDataQa = ({
 		styledComponentNames = DEFAULT_STYLED_COMPONENT_NAMES,
 	} = {},
 }: InjectDataQaParams = {}): InjectDataQaPlugin => {
-	const rebuildModuleFilter = () => {
-		moduleFilter = createModuleFilter({
-			input,
-			include,
-			exclude,
-		})
-	}
+	const moduleFilter = createModuleFilter({ include, exclude })
 
 	const transformModule = function transformModule(
 		this: PluginTransformContext,
@@ -100,16 +91,8 @@ export const injectDataQa = ({
 		}
 	}
 
-	rebuildModuleFilter()
-
 	return {
 		name: 'rollup-plugin-data-qa',
-		options: options => {
-			input = options.input ? Object.values(options.input) : []
-			rebuildModuleFilter()
-
-			return options
-		},
 		transform(code, id) {
 			if (!matchesTransformHookId(id)) {
 				return UNCHANGED

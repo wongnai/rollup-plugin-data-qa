@@ -1,3 +1,5 @@
+import { createFilter } from '@rollup/pluginutils'
+
 import createModuleFilter from '.'
 
 describe('createModuleFilter()', () => {
@@ -9,11 +11,22 @@ describe('createModuleFilter()', () => {
 		['src/Component.d.ts', false],
 	])('should return %s -> %s', (id, expected) => {
 		const filter = createModuleFilter({
-			input: [],
 			include: [],
 			exclude: [],
 		})
 
 		expect(filter(id)).toBe(expected)
+	})
+
+	it('should match app source modules even when rollup input is an html entry', () => {
+		const htmlEntryFilter = createFilter(['index.html'], ['**/node_modules/**'])
+		const filter = createModuleFilter({
+			include: [],
+			exclude: [],
+		})
+		const moduleId = 'src/modules/lock-promotion/components/GetThisPromotionButton/index.tsx'
+
+		expect(htmlEntryFilter(moduleId)).toBe(false)
+		expect(filter(moduleId)).toBe(true)
 	})
 })
