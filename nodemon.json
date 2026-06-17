@@ -1,7 +1,7 @@
 {
-	"watch": ["src", "examples/src"],
+	"watch": ["src"],
 	"ext": "ts,tsx",
 	"ignore": ["src/**/*.spec.ts", "src/**/*.test.ts", "dist/**/*"],
-	"exec": "yarn build && yarn example:sync && yarn example:test --run",
+	"exec": "yarn build && yarn test",
 	"delay": 100
 }

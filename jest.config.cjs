@@ -20,7 +20,9 @@ module.exports = {
 			lines: 80,
 		},
 	},
-	testPathIgnorePatterns: ['/node_modules/', '/examples/'],
+	testPathIgnorePatterns: ['/node_modules/'],
+	setupFilesAfterEnv: ['<rootDir>/src/integration-test/jest.setup.ts'],
+	testEnvironment: 'jsdom',
 	collectCoverageFrom: [
 		'src/**/*.{ts,tsx}',
 		'!src/**/*.stories.{ts,tsx}',
@@ -32,5 +34,6 @@ module.exports = {
 		'!src/**/mocks/*.ts',
 		'!src/**/locale.ts',
 		'!src/icons/**/*',
+		'!src/integration-test/**/*',
 	],
 }
