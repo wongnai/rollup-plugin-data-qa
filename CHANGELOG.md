@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.2.1](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.2.0...v2.2.1) (2026-06-17)
+
 # [2.2.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.1.0...v2.2.0) (2026-06-17)
 
 
