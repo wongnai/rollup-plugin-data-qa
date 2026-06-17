@@ -7,6 +7,7 @@ export interface InjectDataQaParams {
 	include?: string[]
 	exclude?: string[]
 	format?: FormatType
+	childOverrideParent?: boolean
 	options?: InjectDataQaOptions
 }
 

@@ -39,7 +39,7 @@ describe('injectStyledComponent()', () => {
 
 		expect(result).toBe(true)
 		expect(magicString.toString()).toBe(
-			`styled.div.attrs(props => ({...(${IS_E2E_ENABLED} && {"${DATA_QA}":"styled-button"}),...props}))`,
+			`styled.div.attrs(props => ({...(${IS_E2E_ENABLED} && {"${DATA_QA}":"styled-button"}), ...props}))`,
 		)
 	})
 
@@ -85,6 +85,35 @@ describe('injectStyledComponent()', () => {
 		)
 	})
 
+	it('should append data-qa after attrs arrow function properties when childOverrideParent is true', () => {
+		const code = 'props => ({ color: "red" })'
+		const magicString = new MagicString(code)
+		const colorEnd = code.indexOf('"red"') + '"red"'.length
+
+		const result = injectStyledComponent({
+			code: magicString,
+			styledComponentName: 'styled-button',
+			styledComponentNames: new Set(['styled']),
+			childOverrideParent: true,
+			node: {
+				type: 'ArrowFunctionExpression',
+				body: {
+					properties: [{ start: code.indexOf('color'), end: colorEnd }],
+				},
+			},
+			parent: {
+				callee: {
+					property: { name: 'attrs' },
+				},
+			},
+		})
+
+		expect(result).toBe(true)
+		expect(magicString.toString()).toBe(
+			`props => ({ color: "red", ...(${IS_E2E_ENABLED} && {"${DATA_QA}":"styled-button"}) })`,
+		)
+	})
+
 	it('should append data-qa to attrs object expression', () => {
 		const code = '{ color: "red" }'
 		const magicString = new MagicString(code)
@@ -108,6 +137,29 @@ describe('injectStyledComponent()', () => {
 		expect(result).toBe(true)
 		expect(magicString.toString()).toBe(
 			`{ ${`...(${IS_E2E_ENABLED} && {"${DATA_QA}":"styled-button"}),`}color: "red" }`,
+		)
+	})
+
+	it('should chain attrs with data-qa after props when childOverrideParent is true', () => {
+		const code = 'styled.div'
+		const magicString = new MagicString(code)
+
+		const result = injectStyledComponent({
+			code: magicString,
+			styledComponentName: 'styled-button',
+			styledComponentNames: new Set(['styled']),
+			childOverrideParent: true,
+			node: {
+				type: 'MemberExpression',
+				object: { name: 'styled' },
+				property: { name: 'div', end: code.length },
+			},
+			parent: { property: { name: 'init' } },
+		})
+
+		expect(result).toBe(true)
+		expect(magicString.toString()).toBe(
+			`styled.div.attrs(props => ({...props, ...(${IS_E2E_ENABLED} && {"${DATA_QA}":"styled-button"})}))`,
 		)
 	})
 })

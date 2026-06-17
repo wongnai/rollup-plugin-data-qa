@@ -28,6 +28,27 @@ describe('insertToObject()', () => {
 		)
 	})
 
+	it('should insert conditional spread before closing brace when childOverrideParent is true', () => {
+		const code = '<div {} />'
+		const magicString = new MagicString(code)
+		const objectStart = code.indexOf('{')
+
+		insertToObject({
+			code: magicString,
+			node: {
+				type: 'ObjectExpression',
+				start: objectStart,
+				end: objectStart + 2,
+			},
+			attrs: MOCK_ATTRS,
+			childOverrideParent: true,
+		})
+
+		expect(magicString.toString()).toBe(
+			`<div {, ...(${IS_E2E_ENABLED} && ${JSON.stringify(MOCK_ATTRS)})} />`,
+		)
+	})
+
 	it('should not modify code when node is not an object expression', () => {
 		const magicString = new MagicString(MOCK_CODE)
 

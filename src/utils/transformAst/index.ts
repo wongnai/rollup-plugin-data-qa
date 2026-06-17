@@ -10,11 +10,13 @@ import getStyledComponentName from 'utils/react/findStyledComponentName'
 import isJsxElement from 'utils/react/isJsxElement'
 import isReactFragment from 'utils/react/isReactFragment'
 import isReactNode from 'utils/react/isReactNode'
+import { isEmpty, last } from 'lodash-es'
 
 type Params = {
 	ast: BaseNode
 	code: MagicString
 	format: FormatType
+	childOverrideParent?: boolean
 	disabledReactFunctionComponent?: boolean
 	disabledStyledComponent?: boolean
 	styledComponentNames: string[]
@@ -24,6 +26,7 @@ export default function transformAst({
 	ast,
 	code,
 	format,
+	childOverrideParent,
 	disabledReactFunctionComponent,
 	disabledStyledComponent,
 	styledComponentNames,
@@ -66,13 +69,14 @@ export default function transformAst({
 			}
 
 			if (isReactNode(node) || isJsxElement(node)) {
-				if (!disabledReactFunctionComponent && componentStack.length > 0) {
+				if (!disabledReactFunctionComponent && !isEmpty(componentStack)) {
 					const injectElement = isJsxElement(node) ? injectJsxElement : injectReactFunctionComponent
 
 					const isInjected = injectElement({
 						code,
-						componentName: getFormattedName(componentStack[componentStack.length - 1]),
+						componentName: getFormattedName(last(componentStack)!),
 						node,
+						childOverrideParent,
 					})
 
 					if (isInjected) {
@@ -103,6 +107,7 @@ export default function transformAst({
 						styledComponentNames: styledComponentNameSet,
 						node,
 						parent,
+						childOverrideParent,
 					})
 
 					if (isInjected) {

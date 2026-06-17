@@ -1,3 +1,5 @@
+import { isEmpty, last } from 'lodash-es'
+
 import { DATA_QA } from 'pluginConstants'
 import appendObject from 'utils/magicString/appendObject'
 import chainFunctionWithProps from 'utils/magicString/chainFunctionWithProps'
@@ -9,6 +11,7 @@ export default function injectStyledComponent({
 	node,
 	parent,
 	code,
+	childOverrideParent = false,
 }: InjectStyledComponentParams) {
 	if (
 		node?.type === 'MemberExpression' &&
@@ -20,6 +23,7 @@ export default function injectStyledComponent({
 			startPosition: node.property?.end,
 			functionName: 'attrs',
 			attrs: { [DATA_QA]: styledComponentName },
+			childOverrideParent,
 		})
 
 		return true
@@ -28,14 +32,16 @@ export default function injectStyledComponent({
 	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ArrowFunctionExpression' &&
-		node.body.properties?.length
+		!isEmpty(node.body.properties)
 	) {
 		const properties = node.body.properties as Record<string, any>[]
+		const insertPosition = childOverrideParent ? last(properties)!.end : properties[0]!.start
 
 		appendObject({
 			code,
-			startPosition: properties[0]!.start,
+			startPosition: insertPosition,
 			attrs: { [DATA_QA]: styledComponentName },
+			childOverrideParent,
 		})
 
 		return true
@@ -44,14 +50,16 @@ export default function injectStyledComponent({
 	if (
 		parent?.callee?.property?.name === 'attrs' &&
 		node.type === 'ObjectExpression' &&
-		node.properties?.length
+		!isEmpty(node.properties)
 	) {
 		const properties = node.properties as Record<string, any>[]
+		const insertPosition = childOverrideParent ? last(properties)!.end : properties[0]!.start
 
 		appendObject({
 			code,
-			startPosition: properties[0]!.start,
+			startPosition: insertPosition,
 			attrs: { [DATA_QA]: styledComponentName },
+			childOverrideParent,
 		})
 
 		return true

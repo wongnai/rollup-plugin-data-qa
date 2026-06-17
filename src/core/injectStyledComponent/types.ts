@@ -6,4 +6,5 @@ export type InjectStyledComponentParams = {
 	styledComponentNames: ReadonlySet<string>
 	node: Record<string, any>
 	parent: Record<string, any> | null
+	childOverrideParent?: boolean
 }

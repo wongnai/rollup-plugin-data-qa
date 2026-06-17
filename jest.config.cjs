@@ -1,11 +1,15 @@
 module.exports = {
 	moduleFileExtensions: ['json', 'tsx', 'ts', 'js'],
+	moduleNameMapper: {
+		'^lodash-es$': 'lodash',
+		'^lodash-es/(.*)$': 'lodash/$1',
+	},
 	transform: {
 		'^.+\\.(ts|tsx)?$': 'ts-jest',
 		'.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
 	},
 	testRegex: '((\\.|/)(test|spec))\\.(tsx?)$',
-	transformIgnorePatterns: ['/node_modules/'],
+	transformIgnorePatterns: ['/node_modules/(?!(lodash-es)/)'],
 	moduleDirectories: ['node_modules', 'src'],
 	coverageReporters: ['cobertura', 'lcov', 'json', 'text'],
 	coverageThreshold: {

@@ -23,7 +23,23 @@ describe('chainCodeFunction()', () => {
 		})
 
 		expect(magicString.toString()).toBe(
-			`styled.a.attrs(props => ({...(${IS_E2E_ENABLED} && {"data-qa":"ComponentName"}),...props}))`,
+			`styled.a.attrs(props => ({...(${IS_E2E_ENABLED} && {"data-qa":"ComponentName"}), ...props}))`,
+		)
+	})
+
+	it('should append data-qa after props spread when childOverrideParent is true', () => {
+		const magicString = new MagicString(MOCK_CODE)
+
+		chainFunctionWithProps({
+			code: magicString,
+			attrs: MOCK_ATTRS,
+			startPosition: MOCK_INJECT_POSITION,
+			functionName: MOCK_FUNCTION_NAME,
+			childOverrideParent: true,
+		})
+
+		expect(magicString.toString()).toBe(
+			`styled.a.attrs(props => ({...props, ...(${IS_E2E_ENABLED} && {"data-qa":"ComponentName"})}))`,
 		)
 	})
 })

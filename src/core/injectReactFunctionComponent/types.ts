@@ -4,4 +4,5 @@ export type InjectReactFunctionComponentParams = {
 	node: Record<string, any>
 	code: MagicString
 	componentName: string
+	childOverrideParent?: boolean
 }

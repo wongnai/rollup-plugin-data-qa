@@ -24,4 +24,21 @@ describe('appendObject()', () => {
 			`<div {...(${IS_E2E_ENABLED} && {"data-qa":"ComponentName"}),} />`,
 		)
 	})
+
+	it('should append props after existing object properties when childOverrideParent is true', () => {
+		const code = '{ color: "red" }'
+		const magicString = new MagicString(code)
+		const colorEnd = code.indexOf('"red"') + '"red"'.length
+
+		appendObject({
+			code: magicString,
+			attrs: MOCK_ATTRS,
+			startPosition: colorEnd,
+			childOverrideParent: true,
+		})
+
+		expect(magicString.toString()).toBe(
+			`{ color: "red", ...(${IS_E2E_ENABLED} && {"data-qa":"ComponentName"}) }`,
+		)
+	})
 })
