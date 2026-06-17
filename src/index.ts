@@ -29,6 +29,7 @@ export const injectDataQa = ({
 	format = 'paramCase',
 	include = [],
 	exclude = [],
+	childOverrideParent,
 	options: {
 		disabledReactFunctionComponent,
 		disabledStyledComponent,
@@ -69,6 +70,7 @@ export const injectDataQa = ({
 				ast,
 				code: magicString,
 				format,
+				childOverrideParent,
 				disabledReactFunctionComponent,
 				disabledStyledComponent,
 				styledComponentNames,

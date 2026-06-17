@@ -152,4 +152,31 @@ describe('injectReactFunctionComponent()', () => {
 			`jsx("div", { ${`...(${IS_E2E_ENABLED} && {"${DATA_QA}":"button"}),`}className: "a" })`,
 		)
 	})
+
+	it('should append data-qa after existing props when childOverrideParent is true', () => {
+		const code = 'jsx("div", { className: "a" })'
+		const magicString = new MagicString(code)
+		const classNameEnd = code.indexOf('"a"') + '"a"'.length
+
+		const result = injectReactFunctionComponent({
+			code: magicString,
+			componentName: 'button',
+			childOverrideParent: true,
+			node: {
+				callee: { name: 'jsx' },
+				arguments: [
+					{ type: 'Literal', value: 'div' },
+					{
+						type: 'ObjectExpression',
+						properties: [{ start: code.indexOf('className'), end: classNameEnd }],
+					},
+				],
+			},
+		})
+
+		expect(result).toBe(true)
+		expect(magicString.toString()).toBe(
+			`jsx("div", { className: "a", ...(${IS_E2E_ENABLED} && {"${DATA_QA}":"button"}) })`,
+		)
+	})
 })

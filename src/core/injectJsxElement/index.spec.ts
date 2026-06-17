@@ -72,4 +72,28 @@ describe('injectJsxElement()', () => {
 			`<div{...(${IS_E2E_ENABLED} && {"${DATA_QA}":"button"})}  />`,
 		)
 	})
+
+	it('should inject data-qa spread after existing jsx attributes when childOverrideParent is true', () => {
+		const code = '<div className="a" />'
+		const magicString = new MagicString(code)
+		const classNameEnd = code.indexOf('"a"') + '"a"'.length
+
+		const result = injectJsxElement({
+			code: magicString,
+			componentName: 'button',
+			childOverrideParent: true,
+			node: {
+				type: 'JSXElement',
+				openingElement: {
+					attributes: [{ start: code.indexOf('className'), end: classNameEnd }],
+					name: { end: code.indexOf(' ') },
+				},
+			},
+		})
+
+		expect(result).toBe(true)
+		expect(magicString.toString()).toBe(
+			`<div className="a" {...(${IS_E2E_ENABLED} && {"${DATA_QA}":"button"})} />`,
+		)
+	})
 })

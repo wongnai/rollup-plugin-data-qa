@@ -5,4 +5,5 @@ export interface ChainFunctionWithPropsParams {
 	functionName: string
 	attrs: Record<string, any>
 	startPosition: number
+	childOverrideParent?: boolean
 }

@@ -4,4 +4,5 @@ export interface AppendObjectParams {
 	code: MagicString
 	startPosition: number
 	attrs: Record<string, any>
+	childOverrideParent?: boolean
 }
