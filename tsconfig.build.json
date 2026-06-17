@@ -8,5 +8,5 @@
 		"lib": ["ES2017"]
 	},
 	"include": ["src/**/*.ts"],
-	"exclude": ["src/**/*.spec.ts", "src/mocks/**/*", "node_modules", "examples"]
+	"exclude": ["src/**/*.spec.ts", "src/mocks/**/*", "node_modules", "src/integration-test/fixtures"]
 }

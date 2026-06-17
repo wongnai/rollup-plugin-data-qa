@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`childOverrideParent should inject data-qa after existing jsx attributes 1`] = `
+<div
+  class="bello"
+  data-qa="component03"
+  id="bello"
+>
+  xxx
+</div>
+`;
+
+exports[`childOverrideParent should inject data-qa after props spread in styled attrs callback 1`] = `
+.c0 {
+  color: red;
+}
+
+<div
+  class="c0 a"
+  data-qa="styled-a"
+>
+  <div
+    class="c0 a"
+    data-qa="styled-a"
+  >
+    xxx
+  </div>
+</div>
+`;
