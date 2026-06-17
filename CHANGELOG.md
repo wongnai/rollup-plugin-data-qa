@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.2.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.1.0...v2.2.0) (2026-06-17)
+
+
+### Features
+
+* add test to be in same dir and add ci ([#17](https://github.com/wongnai/rollup-plugin-data-qa/issues/17)) ([4272957](https://github.com/wongnai/rollup-plugin-data-qa/commit/4272957827f45e5993b4921097bc9228dd06e293))
+
 # [2.1.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.0.1...v2.1.0) (2026-06-17)
 
 
