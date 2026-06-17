@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.1.0](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.0.1...v2.1.0) (2026-06-17)
+
+
+### Features
+
+* add childOverrideProps ([#16](https://github.com/wongnai/rollup-plugin-data-qa/issues/16)) ([ef87211](https://github.com/wongnai/rollup-plugin-data-qa/commit/ef87211f1f06a11df1a074061e0667bbe1ab7843))
+
 ## [2.0.1](https://github.com/wongnai/rollup-plugin-data-qa/compare/v2.0.0...v2.0.1) (2026-06-16)
 
 
