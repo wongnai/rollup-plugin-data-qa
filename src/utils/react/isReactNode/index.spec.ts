@@ -13,6 +13,9 @@ describe('isReactNode()', () => {
 		],
 		[{ callee: { name: 'jsx' } }, true],
 		[{ callee: { name: 'jsxs' } }, true],
+		[{ callee: { name: 'jsxDEV' } }, true],
+		[{ callee: { name: '_jsxDEV' } }, true],
+		[{ callee: { name: '_jsxDEV' }, arguments: [{ name: '_Fragment' }] }, false],
 		[
 			{
 				callee: { name: 'jsx' },

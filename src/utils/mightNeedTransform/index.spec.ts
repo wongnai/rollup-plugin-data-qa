@@ -9,6 +9,7 @@ describe('mightNeedTransform()', () => {
 	it.each<[string, boolean, Options?]>([
 		['const value = 1', false],
 		['const Component = () => <div />', true],
+		['const Component = () => _jsxDEV("div", {}, void 0, false)', true],
 		['const StyledA = styled.div``', true],
 		[
 			'const value = 1',
